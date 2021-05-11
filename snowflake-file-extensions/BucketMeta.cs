@@ -5,22 +5,24 @@ namespace Snowflake.FileStream
     internal class BucketMeta
     {
         public readonly string BucketName;
-        public readonly string Key;
+        public readonly string BucketPath;
 
-        public static BucketMeta Create(string location, string filename)
+        public static BucketMeta Create(string location)
         {
             var p = location.IndexOf('/');
-            var path = p == -1 ? "" : location[(p + 1)..];
             return new BucketMeta(
                 p == -1 ? location : location[..p],
-                $"{path}/{Path.GetFileName(filename)}"
+                p == -1 ? "" : location[(p + 1)..]
             );
         }
 
-        private BucketMeta(string bucketName, string key)
+        public string CreateKey(string key)
+            => $"{BucketPath}/{key}";
+
+        private BucketMeta(string bucketName, string path)
         {
             BucketName = bucketName;
-            Key = key;
+            BucketPath = path;
         }
     }
 }

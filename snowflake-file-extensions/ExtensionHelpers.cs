@@ -40,15 +40,15 @@ namespace Snowflake.FileStream
             return client.PutObjectAsync(request, token);
         }
 
-        public static async Task<bool> ObjectExistsAsync(this AmazonS3Client client, BucketMeta bucketMeta,
+        public static async Task<bool> ObjectExistsAsync(this AmazonS3Client client, string bucketName, string key,
             CancellationToken token)
         {
             try
             {
                 await client.GetObjectMetadataAsync(new GetObjectMetadataRequest()
                 {
-                    BucketName   = bucketMeta.BucketName,
-                    Key = bucketMeta.Key
+                    BucketName   = bucketName,
+                    Key = key
                 }, token);
                 return true;
             }
