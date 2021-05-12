@@ -39,14 +39,16 @@ namespace Snowflake.FileStream
             using var compressionStream = new BrotliStream(compressedFileStream, CompressionMode.Compress);
             originalFileStream.CopyTo(compressionStream);
         }
-        
+
 
         public static string GetSha256Digest(string path)
         {
-            using var stream = File.OpenRead(path);
-            using var m = SHA256.Create();
-            var hash = m.ComputeHash(stream);
-            return Convert.ToBase64String(hash);
+            using (var stream = File.OpenRead(path))
+            using (var m = SHA256.Create())
+            {
+                var hash = m.ComputeHash(stream);
+                return Convert.ToBase64String(hash);
+            }
         }
         
         public static string NormalisePath(string path)

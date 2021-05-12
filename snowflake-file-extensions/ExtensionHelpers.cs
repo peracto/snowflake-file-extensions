@@ -15,55 +15,17 @@ namespace Snowflake.FileStream
     {
         public static async Task EncryptFile(this ICryptoTransform transform, string inputFile, string outputFile)
         {
-            await using var fsIn = File.OpenRead(inputFile);
-            await using var fsOut = File.OpenWrite(outputFile);
-            try
+            using (var fsIn = File.OpenRead(inputFile))
+            using (var fsOut = File.OpenWrite(outputFile))
+            using (var csEncrypt2 = new CryptoStream(fsOut, transform, CryptoStreamMode.Write))
             {
-                await using var csEncrypt2 = new CryptoStream(fsOut, transform, CryptoStreamMode.Write);
                 await fsIn.CopyToAsync(csEncrypt2);
                 if (!csEncrypt2.HasFlushedFinalBlock)
                     csEncrypt2.FlushFinalBlock();
-            }
-            finally
-            {
-                fsIn.Close();
+                csEncrypt2.Close();
                 fsOut.Close();
+                fsIn.Close();
             }
         }
-        
-        public static Task<PutObjectResponse> PutObjectAsync(this AmazonS3Client client, PutObjectRequest request,
-            IEnumerable<(string, string)> kvps, CancellationToken token)
-        {
-            var metadata = request.Metadata;
-            foreach (var (key, value) in kvps)
-                metadata.Add(key, value);
-            return client.PutObjectAsync(request, token);
-        }
-
-        public static async Task<bool> ObjectExistsAsync(this AmazonS3Client client, string bucketName, string key,
-            CancellationToken token)
-        {
-            try
-            {
-                await client.GetObjectMetadataAsync(new GetObjectMetadataRequest()
-                {
-                    BucketName   = bucketName,
-                    Key = key
-                }, token);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        
-        
-        public static AmazonS3Client Get(this SnowflakeCloudCredentials creds, string region)  
-        {
-            var r = Amazon.RegionEndpoint.GetBySystemName(region);
-            return new AmazonS3Client(creds.AwsKeyId, creds.AwsSecretKey, creds.AwsToken, r);
-        }
-        
     }
 }

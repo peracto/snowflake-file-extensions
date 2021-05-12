@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ZMPtjzvzz0SV1W6YcB9rjFTWW2ZQl6Uhum+gatGdA8Qz6wWFaUMjHBORIgYWO9kYlP+HGjpycZqrlPrnMoAX9Q==",
+  "dgSpecHash": "AXNgEx4dD/1WWfwJf15Ypx8WvcGS9tbpXt8F7FHMHVdCXrr/HQ+bYWk9nOIZbwu8GHVQNc8swnFMOpMmXgRsAw==",
   "success": true,
-  "projectFilePath": "/Users/bourne/RiderProjects/snowflake-file-extensions/snowflake-file-extensions/snowflake-file-extensions.csproj",
+  "projectFilePath": "C:\\Users\\ransong\\source\\repos\\peracto\\snowflake-file-extensions\\snowflake-file-extensions\\snowflake-file-extensions.csproj",
   "expectedPackageFiles": [
-    "/Users/bourne/.nuget/packages/awssdk.core/3.7.0.17/awssdk.core.3.7.0.17.nupkg.sha512",
-    "/Users/bourne/.nuget/packages/awssdk.s3/3.7.0.18/awssdk.s3.3.7.0.18.nupkg.sha512",
-    "/Users/bourne/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\ransong\\.nuget\\packages\\awssdk.core\\3.7.0.17\\awssdk.core.3.7.0.17.nupkg.sha512",
+    "C:\\Users\\ransong\\.nuget\\packages\\awssdk.s3\\3.7.0.18\\awssdk.s3.3.7.0.18.nupkg.sha512",
+    "C:\\Users\\ransong\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }

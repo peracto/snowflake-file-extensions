@@ -17,7 +17,7 @@ namespace Snowflake.FileStream
 
         public static IEnumerable<IFileTask> BuildPutFileTasks(
             SnowflakePutResponse response,
-            IEnumerable<PutFileItem> files = null,
+            IEnumerable<IPutFileItem> files = null,
             Action<PutFileEvent> callback = null
         )
         {
