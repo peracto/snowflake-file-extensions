@@ -10,9 +10,9 @@
 C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\bin\Debug\netcoreapp3.1\snowflake-file-extensions.deps.json
 C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\bin\Debug\netcoreapp3.1\snowflake-file-extensions.dll
 C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\bin\Debug\netcoreapp3.1\snowflake-file-extensions.pdb
-C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\obj\Debug\netcoreapp3.1\snowflake-file-extensions.csprojAssemblyReference.cache
 C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\obj\Debug\netcoreapp3.1\snowflake-file-extensions.AssemblyInfoInputs.cache
 C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\obj\Debug\netcoreapp3.1\snowflake-file-extensions.AssemblyInfo.cs
 C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\obj\Debug\netcoreapp3.1\snowflake-file-extensions.csproj.CoreCompileInputs.cache
 C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\obj\Debug\netcoreapp3.1\snowflake-file-extensions.dll
 C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\obj\Debug\netcoreapp3.1\snowflake-file-extensions.pdb
+C:\Users\ransong\source\repos\peracto\snowflake-file-extensions\snowflake-file-extensions\obj\Debug\netcoreapp3.1\snowflake-file-extensions.csprojAssemblyReference.cache

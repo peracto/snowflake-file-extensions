@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snowflake.FileStream
 {
-    internal class EncryptionMeta : IDisposable
+    public class EncryptionMeta : IDisposable
     {
         public string Key;
         public string Iv;
@@ -18,6 +18,21 @@ namespace Snowflake.FileStream
             if (Transform == null) return;
             Transform.Dispose();
             Transform = null;
+        }
+
+        public async Task EncryptFile(string inputFile, string outputFile)
+        {
+            using (var fsIn = File.OpenRead(inputFile))
+            using (var fsOut = File.OpenWrite(outputFile))
+            using (var csEncrypt2 = new CryptoStream(fsOut, Transform, CryptoStreamMode.Write))
+            {
+                await fsIn.CopyToAsync(csEncrypt2);
+                if (!csEncrypt2.HasFlushedFinalBlock)
+                    csEncrypt2.FlushFinalBlock();
+                csEncrypt2.Close();
+                fsOut.Close();
+                fsIn.Close();
+            }
         }
     }
 }
