@@ -1,84 +1,99 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
 
 namespace Snowflake.FileStream
 {
     internal static class CryptoManager
     {
-        public static EncryptionMeta CreateCrypto(
-            string queryStageMasterKey
-        )
+        private static readonly RNGCryptoServiceProvider Provider = new RNGCryptoServiceProvider();
+        private static InternalCryptoManager _internalCryptoManager = new InternalCryptoManager(-1, null, null);
+
+        public static CryptoMeta CreateCrypto(string masterKey)
         {
-            var decodedKey = Convert.FromBase64String(queryStageMasterKey);
+            var decodedKey = Convert.FromBase64String(masterKey);
             var fileKey = CreateSecureRandom(decodedKey.Length);
             var ivKey = CreateSecureRandom(decodedKey.Length);
-            var result = EncryptKey(decodedKey, fileKey);
 
-            return new EncryptionMeta
+            if (_internalCryptoManager.KeySize != fileKey.Length)
+                _internalCryptoManager = C.GetOrCreate(fileKey.Length);
+
+            return new CryptoMeta
             {
-                Key = Convert.ToBase64String(result),
+                Key = Convert.ToBase64String(_internalCryptoManager.EncryptKey(decodedKey, fileKey)),
                 Iv = Convert.ToBase64String(ivKey),
                 KeySize = decodedKey.Length * 8,
-                Transform = CreateEncryptor(fileKey, ivKey)
+                Transform = _internalCryptoManager.CreateEncryptor(fileKey, ivKey)
             };
         }
 
-        private static readonly RNGCryptoServiceProvider Provider = new RNGCryptoServiceProvider();
-        
+        private class InternalCryptoManager
+        {
+            public int KeySize { get; }
+            private Aes Cbc { get; }
+            private Aes Ecb { get; }
+
+            public InternalCryptoManager(int keySize, Aes cbc, Aes ecb)
+            {
+                KeySize = keySize;
+                Cbc = cbc;
+                Ecb = ecb;
+            }
+
+            public byte[] EncryptKey(byte[] decodedKey, byte[] fileKey)
+            {
+                using var cipher = Ecb.CreateEncryptor(decodedKey, null!);
+                return cipher.TransformFinalBlock(fileKey, 0, fileKey.Length);
+            }
+
+            public ICryptoTransform CreateEncryptor(byte[] fileKey, byte[] ivKey) 
+                => Cbc.CreateEncryptor(fileKey, ivKey);
+        }
+
+        private static class C
+        {
+            private static readonly List<InternalCryptoManager> Cryptos = new List<InternalCryptoManager>();
+
+            public static InternalCryptoManager GetOrCreate(int keySize)
+            {
+                lock (Cryptos)
+                {
+                    foreach (var c in Cryptos)
+                        if (c.KeySize == keySize)
+                            return c;
+                    return Add(Create(keySize));
+                }
+            }
+
+            private static InternalCryptoManager Create(int keySize) =>
+                new InternalCryptoManager(
+                    keySize,
+                    new AesCryptoServiceProvider
+                    {
+                        KeySize = keySize * 8,
+                        Padding = PaddingMode.PKCS7,
+                        Mode = CipherMode.CBC
+                    },
+                    new AesCryptoServiceProvider
+                    {
+                        KeySize = keySize * 8,
+                        Padding = PaddingMode.PKCS7,
+                        Mode = CipherMode.ECB
+                    }
+                );
+
+            private static InternalCryptoManager Add(InternalCryptoManager internalCryptoManager)
+            {
+                Cryptos.Add(internalCryptoManager);
+                return internalCryptoManager;
+            }
+        }
+
         private static byte[] CreateSecureRandom(int length)
         {
             var array = new byte[length];
             Provider.GetBytes(array);
             return array;
         }
-        
-        private static readonly List<Aes> Cryptos = new List<Aes>();
-        private static Aes lastCbc = null;
-        private static Aes lastEcb = null;
-
-        private static Aes GetCryptoCbc(int keySize)
-        {
-            if (lastCbc == null || lastCbc.KeySize != keySize)
-                lastCbc = GetOrCreate(keySize, CipherMode.CBC);
-            return lastCbc;
-        }
-
-        private static ICryptoTransform CreateEncryptor(byte[] fileKey, byte[] ivKey)
-        {
-            return GetCryptoCbc(fileKey.Length * 8).CreateEncryptor(fileKey, ivKey);
-        }
-
-        private static Aes GetCryptoEcb(int keySize)
-        {
-            if (lastEcb == null || lastEcb.KeySize != keySize)
-                lastEcb = GetOrCreate(keySize, CipherMode.ECB);
-            return lastEcb;
-        }
-
-        private static byte[] EncryptKey(byte[] decodedKey, byte[] fileKey)
-        {
-            using var cipher = GetCryptoEcb(fileKey.Length * 8).CreateEncryptor(decodedKey, null!);
-            return cipher.TransformFinalBlock(fileKey, 0, fileKey.Length);
-        }
-
-        private static Aes GetOrCreate(int keySize, CipherMode mode)
-        {
-            foreach (var c in Cryptos)
-                if (c.KeySize == keySize && c.Mode == mode)
-                    return c;
-
-            var x = new AesCryptoServiceProvider
-            {
-                KeySize = keySize,
-                Padding = PaddingMode.PKCS7,
-                Mode = mode
-            };
-            Cryptos.Add(x);
-            return x;
-        }
-
     }
 }

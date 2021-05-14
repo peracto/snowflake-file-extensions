@@ -13,6 +13,6 @@ namespace Snowflake.FileStream
             CancellationToken token
             );
 
-        EncryptionMeta Crypto { get; }
+        CryptoMeta Crypto { get; }
     }
 }

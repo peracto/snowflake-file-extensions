@@ -1,4 +1,5 @@
 ﻿using Snowflake.FileStream.Model;
+using Snowflake.FileStream.StorageClients.AmazonS3;
 
 namespace Snowflake.FileStream
 {

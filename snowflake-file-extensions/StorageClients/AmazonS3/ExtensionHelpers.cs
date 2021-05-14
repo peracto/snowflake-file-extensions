@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Amazon.S3;
 using Amazon.S3.Model;
 
-namespace Snowflake.FileStream
+namespace Snowflake.FileStream.StorageClients.AmazonS3
 {
     internal static class ExtensionHelpers2
     {

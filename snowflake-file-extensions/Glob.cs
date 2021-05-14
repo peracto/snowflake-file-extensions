@@ -24,7 +24,7 @@ namespace Snowflake.FileStream
             );
         }
 
-        private static readonly string pathSeperator = $"{Path.DirectorySeparatorChar}"; 
+        private static readonly string PathSeparator = $"{Path.DirectorySeparatorChar}"; 
         
         private static IEnumerable<string> GetDeepFolder(string directoryName)
         {
@@ -34,7 +34,7 @@ namespace Snowflake.FileStream
             for (var i = 0; i < pathParts.Length; i++)
             {
                 // Build non-global path components first
-                var path = pathSeperator;
+                var path = PathSeparator;
                 for (; i < pathParts.Length && !IsGlob(pathParts[i]); i++)
                     path = Path.Join(path, pathParts[i]);
 
@@ -94,7 +94,7 @@ namespace Snowflake.FileStream
         }
 
 
-        static string NormalisePath(string path)
+        private static string NormalisePath(string path)
         {
             var p = path.Trim();
             return Path.GetFullPath(
@@ -108,7 +108,7 @@ namespace Snowflake.FileStream
             => path.Contains('*') || path.Contains('?');
 
 
-        private static EnumerationOptions EnumerationOptions = new EnumerationOptions()
+        private static readonly EnumerationOptions EnumerationOptions = new EnumerationOptions()
         {
             IgnoreInaccessible = true,
             RecurseSubdirectories = false,

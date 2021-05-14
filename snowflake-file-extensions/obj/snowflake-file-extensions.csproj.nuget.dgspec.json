@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ransong\\source\\repos\\peracto\\snowflake-file-extensions\\snowflake-file-extensions\\snowflake-file-extensions.csproj": {}
+    "/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/snowflake-file-extensions/snowflake-file-extensions.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ransong\\source\\repos\\peracto\\snowflake-file-extensions\\snowflake-file-extensions\\snowflake-file-extensions.csproj": {
+    "/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/snowflake-file-extensions/snowflake-file-extensions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ransong\\source\\repos\\peracto\\snowflake-file-extensions\\snowflake-file-extensions\\snowflake-file-extensions.csproj",
+        "projectUniqueName": "/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/snowflake-file-extensions/snowflake-file-extensions.csproj",
         "projectName": "snowflake-file-extensions",
-        "projectPath": "C:\\Users\\ransong\\source\\repos\\peracto\\snowflake-file-extensions\\snowflake-file-extensions\\snowflake-file-extensions.csproj",
-        "packagesPath": "C:\\Users\\ransong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ransong\\source\\repos\\peracto\\snowflake-file-extensions\\snowflake-file-extensions\\obj\\",
+        "projectPath": "/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/snowflake-file-extensions/snowflake-file-extensions.csproj",
+        "packagesPath": "/Users/bourne/.nuget/packages/",
+        "outputPath": "/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/snowflake-file-extensions/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ransong\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/bourne/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -64,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,11 +1,9 @@
-using System.IO;
-
-namespace Snowflake.FileStream
+namespace Snowflake.FileStream.StorageClients.AmazonS3
 {
     internal class BucketMeta
     {
         public readonly string BucketName;
-        public readonly string BucketPath;
+        private readonly string _bucketPath;
 
         public static BucketMeta Create(string location)
         {
@@ -17,12 +15,12 @@ namespace Snowflake.FileStream
         }
 
         public string CreateKey(string key)
-            => $"{BucketPath}/{key}";
+            => $"{_bucketPath}/{key}";
 
         private BucketMeta(string bucketName, string path)
         {
             BucketName = bucketName;
-            BucketPath = path;
+            _bucketPath = path;
         }
     }
 }

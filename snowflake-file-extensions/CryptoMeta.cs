@@ -1,12 +1,11 @@
 using System;
 using System.IO;
-using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Snowflake.FileStream
 {
-    public class EncryptionMeta : IDisposable
+    public class CryptoMeta : IDisposable
     {
         public string Key;
         public string Iv;

@@ -1,29 +1,31 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Snowflake.FileStream.Model;
 
-namespace Snowflake.FileStream
+namespace Snowflake.FileStream.StorageClients.AmazonS3
 {
-
-
     internal class PutFileS3 : IPutFile
     {
-        internal static IPutFile Create(SnowflakePutResponse Response)
+        internal static IPutFile Create(SnowflakePutResponse response)
         {
-            var stageInfo = Response.StageInfo;
+            var stageInfo = response.StageInfo;
             var r = Amazon.RegionEndpoint.GetBySystemName(stageInfo.Region);
-            var creds = stageInfo.Credentials;
+            var credentials = stageInfo.Credentials;
 
             var meta = CryptoManager.CreateCrypto(
-                Response.EncryptionMaterial.QueryStageMasterKey
+                response.EncryptionMaterial.QueryStageMasterKey
             );
 
             return new PutFileS3(
-                new AmazonS3Client(creds.AwsKeyId, creds.AwsSecretKey, creds.AwsToken, r),
-                ConvertToString(Response.EncryptionMaterial, meta.KeySize),
+                new AmazonS3Client(
+                    credentials.AwsKeyId, 
+                    credentials.AwsSecretKey, 
+                    credentials.AwsToken, 
+                    r
+                ),
+                ConvertToString(response.EncryptionMaterial, meta.KeySize),
                 BucketMeta.Create(stageInfo.Location),
                 meta
             );
@@ -32,14 +34,10 @@ namespace Snowflake.FileStream
         private AmazonS3Client Client { get; }
         private string MatDesc { get;  }
         private BucketMeta Bucket { get; }
-
-
-        public EncryptionMeta Crypto { get; }
-
+        public CryptoMeta Crypto { get; }
         private static string ConvertToString(SnowflakeEncryptionMaterial em, int keySize)
             => $"{{\"queryId\":\"{em.QueryId}\",\"smkId\":\"{em.SmkId}\",\"keySize\":\"{keySize}\"}}";
-
-        private PutFileS3(AmazonS3Client client, string matDesc, BucketMeta bucket, EncryptionMeta crypto)
+        private PutFileS3(AmazonS3Client client, string matDesc, BucketMeta bucket, CryptoMeta crypto)
         {
             Client = client;
             MatDesc = matDesc;
