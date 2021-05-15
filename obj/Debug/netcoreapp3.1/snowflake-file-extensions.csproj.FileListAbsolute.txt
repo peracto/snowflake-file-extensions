@@ -1,0 +1,9 @@
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/bin/Debug/netcoreapp3.1/snowflake-file-extensions.deps.json
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/bin/Debug/netcoreapp3.1/snowflake-file-extensions.dll
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/bin/Debug/netcoreapp3.1/snowflake-file-extensions.pdb
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/obj/Debug/netcoreapp3.1/snowflake-file-extensions.csprojAssemblyReference.cache
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/obj/Debug/netcoreapp3.1/snowflake-file-extensions.AssemblyInfoInputs.cache
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/obj/Debug/netcoreapp3.1/snowflake-file-extensions.AssemblyInfo.cs
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/obj/Debug/netcoreapp3.1/snowflake-file-extensions.csproj.CoreCompileInputs.cache
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/obj/Debug/netcoreapp3.1/snowflake-file-extensions.dll
+/Users/bourne/RiderProjects/OracleTest/lib/snowflake-file-extensions/obj/Debug/netcoreapp3.1/snowflake-file-extensions.pdb
