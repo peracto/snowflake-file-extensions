@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "snowflake-file-extensions", "snowflake-file-extensions\snowflake-file-extensions.csproj", "{3BB71146-E192-418B-82E1-4C7F50884E4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "snowflake-file-extensions", "snowflake-file-extensions.csproj", "{3BB71146-E192-418B-82E1-4C7F50884E4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
